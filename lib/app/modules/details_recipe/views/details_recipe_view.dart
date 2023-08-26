@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:get/get.dart';
+import 'package:my_recipe/app/modules/protein/views/protein_view.dart';
 
+import '../../fat/views/fat_view.dart';
 import '../controllers/details_recipe_controller.dart';
+import 'package:buttons_tabbar/buttons_tabbar.dart';
 
 class DetailsRecipeView extends GetView<DetailsRecipeController> {
 
@@ -322,7 +325,7 @@ class DetailsRecipeView extends GetView<DetailsRecipeController> {
                   ),
 
                   Padding(
-                    padding: const EdgeInsets.only(top: 8.0),
+                    padding: const EdgeInsets.only(top: 8.0 , bottom: 8),
                     child: Align(
                       alignment: Alignment.centerLeft,
                       child: Text("Nutrients",
@@ -340,70 +343,167 @@ class DetailsRecipeView extends GetView<DetailsRecipeController> {
                   Align(
                     alignment: Alignment.centerLeft,
                     child: SizedBox(
-                      height: Get.height * 0.18,
+                      height: Get.height * 0.13,
                       width: Get.width,
-                      child: ListView.builder(
-                        shrinkWrap: true,
-                        scrollDirection: Axis.horizontal,
-                        itemCount: detailsRecipeController.hitsModel.recipe!.ingredients!.length,
-                        itemBuilder: (context, index) {
-                          return Padding(
-                            padding: EdgeInsets.only(right: Get.width * 0.03, top: 8.0, bottom: 8.0),
-                            child: Container(
-                              decoration: BoxDecoration(
-                                color: Colors.grey[200],
-                                borderRadius: BorderRadius.circular(15.0),
-                              ),
-                              child: Container(
-                                height: Get.height * 0.1,
-                                width: Get.width * 0.33,
-                                decoration: BoxDecoration(
-                                  color: Color(0xff7EEF03),
-                                  borderRadius: BorderRadius.circular(15.0),
-                                ),
-                                child: Stack(
-                                    children: [
-                                      Padding(
-                                        padding: EdgeInsets.only(top: Get.height * 0.03, left: Get.height * 0.02, right: Get.height * 0.02),
-                                        child: Text(detailsRecipeController.hitsModel.recipe!.ingredients![index].text!,
-                                          maxLines: 2,
+                      child: Container(
+                          decoration: BoxDecoration(
+                            color: Color(0xff7EEF03),
+                            borderRadius: BorderRadius.only(
+                              topRight: Radius.circular(40),
+                              bottomLeft: Radius.circular(40),
+                              bottomRight: Radius.circular(40),
+                            ),
+                          ),
+                        child: Padding(
+                          padding: EdgeInsets.only(top: Get.height * 0.03,),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              SizedBox(
+                                width: Get.width * 0.3,
+                                child: Column(
+                                  children: [
+                                    Container(
+                                      decoration: BoxDecoration(
+                                        color: Colors.grey[300],
+                                        borderRadius: BorderRadius.circular(10.0),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Colors.grey.withOpacity(0.5),
+                                            spreadRadius: 2,
+                                            blurRadius: 7,
+                                            offset: Offset(0, 3), // changes position of shadow
+                                          ),
+                                        ],
+                                      ),
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(5.0),
+                                        child: Text(detailsRecipeController.hitsModel.recipe!.calories!.toString().substring(0, 3),
                                           textAlign: TextAlign.center,
                                           style: TextStyle(
                                             color: Colors.black87,
-                                            fontSize: 20.0,
-                                            fontWeight: FontWeight.w700,
+                                            fontSize: 16.0,
+                                            fontWeight: FontWeight.w500,
                                           ),
                                         ),
                                       ),
-                                      Positioned(
-                                        bottom: 0,
-                                        child: Container(
-                                          height: Get.height * 0.05,
-                                          width: Get.width * 0.33,
-                                          decoration: BoxDecoration(
-                                              color: Color(0xffccf5a0),
-                                              borderRadius: BorderRadius.only(bottomLeft: Radius.circular(15.0), bottomRight: Radius.circular(15.0))
-                                          ),
-                                          child: Center(
-                                            child: Text(detailsRecipeController.hitsModel.recipe!.ingredients![index].foodCategory!,
-                                              maxLines: 1,
-                                              style: TextStyle(
-                                                fontSize: 14.0,
-                                                color: Colors.black87,
-                                                fontWeight: FontWeight.w500,
-                                              ),
-                                            ),
-                                          ),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.only(top: Get.height * 0.01),
+                                      child: Text('CAL/SERV',
+                                        style: TextStyle(
+                                          color: Colors.black54,
+                                          fontSize: 16.0,
+                                          fontWeight: FontWeight.w500,
                                         ),
                                       ),
-                                    ]
+                                    ),
+                                  ],
 
                                 ),
                               ),
-                            ),
-                          );
-                        },
-                      ),
+                              Container(
+                                height: Get.height * 0.08,
+                                width: Get.width * 0.003,
+                                color: Colors.black54,
+                              ),
+                              SizedBox(
+                                width: Get.width * 0.3,
+                                child: Column(
+                                  children: [
+                                    Container(
+                                      decoration: BoxDecoration(
+                                        color: Colors.grey[300],
+                                        borderRadius: BorderRadius.circular(10.0),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Colors.grey.withOpacity(0.5),
+                                            spreadRadius: 2,
+                                            blurRadius: 7,
+                                            offset: Offset(0, 3), // changes position of shadow
+                                          ),
+                                        ],
+                                      ),
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(5.0),
+                                        child: Text("${detailsRecipeController.hitsModel.recipe!.totalDaily!.eNERCKCAL!.quantity.toString().substring(0, 2)}%",
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                            color: Colors.black87,
+                                            fontSize: 16.0,
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.only(top: Get.height * 0.01),
+                                      child: Text('DAILY VALUE',
+                                        style: TextStyle(
+                                          color: Colors.black54,
+                                          fontSize: 16.0,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+
+                                ),
+                              ),
+                              Container(
+                                height: Get.height * 0.08,
+                                width: Get.width * 0.003,
+                                color: Colors.black54,
+                              ),
+                              SizedBox(
+                                width: Get.width * 0.3,
+                                child: Column(
+                                  children: [
+                                    Container(
+                                      decoration: BoxDecoration(
+                                        color: Colors.grey[300],
+                                        borderRadius: BorderRadius.circular(10.0),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Colors.grey.withOpacity(0.5),
+                                            spreadRadius: 2,
+                                            blurRadius: 7,
+                                            offset: Offset(0, 3), // changes position of shadow
+                                          ),
+                                        ],
+                                      ),
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(5.0),
+                                        child: Text(detailsRecipeController.hitsModel.recipe!.totalTime!.toString().substring(0, 2),
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                            color: Colors.black87,
+                                            fontSize: 16.0,
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.only(top: Get.height * 0.01),
+                                      child: Text('SERVINGS',
+                                        style: TextStyle(
+                                          color: Colors.black54,
+                                          fontSize: 16.0,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+
+                                ),
+                              ),
+                            ],
+                          ),
+                        )
+                      )
+
+
                     ),
                   ),
 
@@ -426,7 +526,7 @@ class DetailsRecipeView extends GetView<DetailsRecipeController> {
                   Align(
                     alignment: Alignment.centerLeft,
                     child: SizedBox(
-                      height: Get.height * 0.18,
+                      height: Get.height * 0.04,
                       width: Get.width,
                       child: ListView.builder(
                         shrinkWrap: true,
@@ -538,6 +638,86 @@ class DetailsRecipeView extends GetView<DetailsRecipeController> {
                   ),
 
 
+
+
+
+
+
+            SizedBox(
+              height: Get.height * 0.3,
+              child: DefaultTabController(
+                length: 2,
+                initialIndex: 0,
+                child: Column(
+                  children: [
+                    ButtonsTabBar(
+                      onTap: (index) {
+                        print(index);
+                      },
+                      radius: 5,
+                      contentPadding: EdgeInsets.symmetric(horizontal: 10),
+                      // borderWidth: 0.5,
+                      borderColor: Colors.transparent,
+                      // center: true,
+                      decoration: const BoxDecoration(
+                        gradient: LinearGradient(
+                          colors: <Color>[
+                            Color(0xFF1976D2),
+                            Color(0xFF42A5F5),
+                            Color(0xFF61B4F3),
+                          ],
+                        ),
+                      ),
+                      // unselectedLabelStyle: TextStyle(color: Colors.black),
+                      height: 56,
+                      labelStyle:
+                      const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                      tabs: const [
+                        Tab(
+                          icon: Icon(Icons.directions_walk),
+                          text: "Floor Movement",
+                        ),
+                        Tab(
+                          icon: Icon(Icons.exit_to_app),
+                          text: "Outside Office",
+                        ),
+                      ],
+                    ),
+
+
+                    Expanded(
+                      child: TabBarView(
+                        physics: const NeverScrollableScrollPhysics(),
+                        children: <Widget>[
+                          ProteinView(),
+                          NutrientCard(),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                 ],
               ),
             ),
@@ -629,3 +809,18 @@ class DetailsRecipeView extends GetView<DetailsRecipeController> {
     );
   }
 }
+
+class NutrientCard extends StatelessWidget {
+  int? index;
+  NutrientCard({super.key, this.index});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 20,
+      color: Colors.red,
+      child: Text('data'),
+    );
+  }
+}
+

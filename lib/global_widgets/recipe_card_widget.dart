@@ -41,7 +41,7 @@ class RecipeCard extends StatelessWidget {
                 children: [
                   Expanded(
                       child: Image.network(
-                        homeController.attendanceModel
+                        homeController.recipeModel
                             .hits![index].recipe!.image!,
                         fit: BoxFit.cover,
                         height: Get.height * 0.4,
@@ -58,7 +58,7 @@ class RecipeCard extends StatelessWidget {
                                   8.0),
                               child: Text(
                                 homeController
-                                    .attendanceModel
+                                    .recipeModel
                                     .hits![index]
                                     .recipe!
                                     .calories!
@@ -91,7 +91,7 @@ class RecipeCard extends StatelessWidget {
                                   8.0),
                               child: Text(
                                 homeController
-                                    .attendanceModel
+                                    .recipeModel
                                     .hits![index]
                                     .recipe!
                                     .totalWeight!
@@ -120,7 +120,7 @@ class RecipeCard extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
-                  homeController.attendanceModel
+                  homeController.recipeModel
                       .hits![index].recipe!.label!,
                   style: const TextStyle(
                     shadows: [
@@ -144,7 +144,7 @@ class RecipeCard extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
-                  homeController.attendanceModel
+                  homeController.recipeModel
                       .hits![index].recipe!.source!,
                   style: const TextStyle(
                     shadows: [

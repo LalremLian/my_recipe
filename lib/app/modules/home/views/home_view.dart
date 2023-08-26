@@ -81,7 +81,7 @@ class HomeView extends GetView<HomeController> {
                         ),
                       ),
                       onFieldSubmitted: (value) {
-                        homeController.getAttendanceData(value);
+                        homeController.getRecipes();
                       },
                     ),
                   ),
@@ -101,7 +101,7 @@ class HomeView extends GetView<HomeController> {
         ),
         body: Obx(() => (controller.isLoading.value
             ? const Center(child: CircularProgressIndicator())
-            : (controller.attendanceModel.hits == null
+            : (controller.recipeModel.hits == null
                 ? const Center(child: Text('Search your desired recipe'))
                 : SingleChildScrollView(
                     child: Column(
@@ -124,7 +124,7 @@ class HomeView extends GetView<HomeController> {
                           shrinkWrap: true,
                           physics: const NeverScrollableScrollPhysics(),
                           itemCount:
-                              homeController.attendanceModel.hits!.length,
+                              homeController.recipeModel.hits!.length,
                           gridDelegate:
                               const SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 2,
@@ -134,7 +134,7 @@ class HomeView extends GetView<HomeController> {
                               onTap: () {
                                 Get.toNamed(Routes.DETAILS_RECIPE,
                                     arguments: homeController
-                                        .attendanceModel.hits![index]);
+                                        .recipeModel.hits![index]);
                               },
                               child: RecipeCard(
                                 homeController: homeController,

@@ -10,7 +10,7 @@ class HomeController extends GetxController {
 
   RxBool isLoading = false.obs;
 
-  Search attendanceModel = Search();
+  Search recipeModel = Search();
   Search searchModel = Search();
 
   DioRequest dioTest = DioRequest();
@@ -19,23 +19,35 @@ class HomeController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    getAttendanceData("");
+    getRecipes();
   }
 
-  Future<void> getAttendanceData(String searchedRecipe) async {
+  Future<void> getRecipes() async {
 
 
-    attendanceModel = Search();
+    recipeModel = Search();
     isLoading.value = true;
     if(searchController.text.isEmpty) {
       isLoading.value = false;
       return;
     }
     var response = await dioTest
-        .requestApi(endPoint: '/search', method: 'GET', map: {'q': searchController.text});
+        .requestApi(endPoint: '/api/recipes/v2', method: 'GET', map: {
+      'type': 'public',
+      'co2EmissionsClass': 'A+',
+      'field[0]': 'uri',
+      'beta': 'true',
+      'random': 'true',
+      'cuisineType[0]': '',
+      'imageSize[0]': '',
+      'mealType[0]': '',
+      'health[0]': '',
+      'diet[0]': '',
+      'dishType[0]': searchController.text,
+    });
 
     response.fold((left) {
-      attendanceModel = Search.fromJson(left);
+      recipeModel = Search.fromJson(left);
       isLoading.value = false;
     }, (right) {
       Get.snackbar(right, '', snackPosition: SnackPosition.BOTTOM);
