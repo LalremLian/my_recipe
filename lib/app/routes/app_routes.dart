@@ -6,13 +6,9 @@ abstract class Routes {
 
   static const HOME = _Paths.HOME;
   static const DETAILS_RECIPE = _Paths.DETAILS_RECIPE;
-  static const FAT = _Paths.FAT;
-  static const PROTEIN = _Paths.PROTEIN;
 }
 
 abstract class _Paths {
   static const HOME = '/home';
   static const DETAILS_RECIPE = '/details-recipe';
-  static const FAT = '/fat';
-  static const PROTEIN = '/protein';
 }
